@@ -1,3 +1,29 @@
+# My Solution
+
+```python
+def c(p, r):
+    for i in range(r+1):
+        if not p:  # Empty world
+            return []
+        d = min(p, key=lambda t: t[0])[0]  # x_min
+        e = min(p, key=lambda t: t[1])[1]  # y_min
+        p = [(x-d, y-e) for (x, y) in p]  # Normalize p
+        if i == r:
+            break
+        a = max(p, key=lambda t: t[0])[0]  # x_max
+        b = max(p, key=lambda t: t[1])[1]  # y_max
+        p_ = []
+        for y in range(-1, b+2):
+            for x in range(-1, a+2):
+                # shift 0b1000 (if cell alive: 0b11000) by number of alive surrounding cells right, if alive in next round LSB is 1
+                alive = (8+16*((x, y) in p) >> sum((x+x_, y+y_) in p for (x_, y_) in product([-1, 0, 1], repeat=2))) & 1
+                if alive:
+                    p_.append((x, y))
+        p = p_
+
+    return p
+```
+
 # Conway's Game of Life
 ## _Code Golf Challenge für den IT Carreer Summit_
 ### Gewinne eine RTX 3070 TI und vieles mehr

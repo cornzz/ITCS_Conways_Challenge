@@ -5,6 +5,7 @@
 import argparse
 from conways_game_of_life import c
 
+
 def main():
     parser = argparse.ArgumentParser(description='Process some integers.')
 
@@ -19,7 +20,8 @@ def main():
     parser.add_argument('--rounds', type=int, dest="rounds")
     args = parser.parse_args()
     tuples = c(args.coords, args.rounds)
-    print(tuples) #[(0,0), (1,1), (2,2)]
+    print(tuples == [(1,0), (2,1), (0,2), (1,2), (2,2)])
+
 
 if __name__ == "__main__":
     main()
