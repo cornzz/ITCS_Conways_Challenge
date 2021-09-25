@@ -1,5 +1,5 @@
 # My Solution
-Minified: 388 characters
+Minified: 363 chars (conways_game_of_life.py)
 
 ```python
 from itertools import product
@@ -9,21 +9,21 @@ def c(p, r):
       return []
     d = min(p, key=lambda t: t[0])[0]  # x_min
     e = min(p, key=lambda t: t[1])[1]  # y_min
-    p = [(x - d, y - e) for (x, y) in p]  # Normalize p
+    p = [(x-d, y-e) for (x, y) in p]  # Normalize p
     if i == r:
       break
     a = max(p, key=lambda t: t[0])[0]  # x_max
     b = max(p, key=lambda t: t[1])[1]  # y_max
     p = [
       (x, y) # Test all points in between min and max x/y coords, aswell as an extra row/column on each side
-      for x in range(-1, b + 2)
-      for y in range(-1, a + 2)
+      for x in range(-1, b+2)
+      for y in range(-1, a+2)
       # Shift 0b1000 (if cell is alive: 0b11000) by number of alive surrounding cells right,
       # if cell is alive in next round LSB is 1
       if (
              8 + 16 * ((x, y) in p)
              >>
-             sum((x + x_, y + y_) in p for (x_, y_) in product([-1, 0, 1], repeat=2))
+             sum((x+x_, y+y_) in p for (x_, y_) in product([-1, 0, 1], repeat=2))
          ) & 1
     ]
 
